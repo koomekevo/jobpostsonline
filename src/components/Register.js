@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const Register = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -26,9 +26,24 @@ const Register = () => {
     <div>
       <h2>Register</h2>
       <form onSubmit={handleSubmit}>
-        <input type="text" placeholder="Name" value={name} onChange={handleNameChange} />
-        <input type="email" placeholder="Email" value={email} onChange={handleEmailChange} />
-        <input type="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
+        <input
+          type="text"
+          placeholder="Name"
+          value={name}
+          onChange={handleNameChange}
+        />
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={handleEmailChange}
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={handlePasswordChange}
+        />
         <button type="submit">Register</button>
       </form>
     </div>

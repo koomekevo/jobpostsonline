@@ -1,10 +1,10 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Home from './components/Home';
-import Login from './components/Login';
-import Register from './components/Register';
-import JobListings from './components/JobListings';
-import JobDetails from './components/JobDetails';
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Home from "./components/Home";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import JobListings from "./components/JobListings";
+import JobDetails from "./components/JobDetails";
 
 const App = () => {
   return (
