@@ -1,30 +1,34 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-const JobDetails = ({ match }) => {
+const JobDetails = ({ jobId }) => {
   const [job, setJob] = useState(null);
 
   useEffect(() => {
-    axios
-      .get(`/api/jobs/${match.params.id}`)
-      .then((response) => {
+    const fetchJobDetails = async () => {
+      try {
+        const response = await axios.get(`/api/joblistings/${jobId}`);
         setJob(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [match.params.id]);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchJobDetails();
+  }, [jobId]);
 
   if (!job) {
-    return <div>Loading...</div>;
+    return <p>Loading...</p>;
   }
 
   return (
-    <div className="space-y-4">
-      <h2 className="text-2xl font-bold">Job Details</h2>
-      <h3 className="text-lg font-bold">{job.title}</h3>
-      <p className="text-gray-600">{job.company}</p>
+    <div>
+      <h2 className="text-2xl font-bold mb-4">Job Details</h2>
+      <h3 className="text-xl font-bold">{job.title}</h3>
+      <p>{job.company}</p>
+      <p>{job.location}</p>
       <p>{job.description}</p>
+      <p>{job.requirements}</p>
     </div>
   );
 };

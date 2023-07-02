@@ -1,31 +1,41 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const JobListings = () => {
-  const [jobs, setJobs] = useState([]);
+  const [jobListings, setJobListings] = useState([]);
 
   useEffect(() => {
-    axios
-      .get('/api/jobs')
-      .then((response) => {
-        setJobs(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    const fetchJobListings = async () => {
+      try {
+        const response = await axios.get("/api/joblistings");
+        setJobListings(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchJobListings();
   }, []);
 
   return (
-    <div className="space-y-4">
-      <h2 className="text-2xl font-bold">Job Listings</h2>
-      {jobs.map((job) => (
-        <div key={job._id} className="border border-gray-300 rounded p-4">
-          <h3 className="text-lg font-bold">{job.title}</h3>
-          <p className="text-gray-600">{job.company}</p>
-          <Link to={`/jobs/${job._id}`} className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">View Details</Link>
-        </div>
-      ))}
+    <div>
+      <h2 className="text-2xl font-bold mb-4">Job Listings</h2>
+      {jobListings.length === 0 ? (
+        <p>No job listings available.</p>
+      ) : (
+        <ul>
+          {jobListings.map((job) => (
+            <li key={job._id} className="mb-4">
+              <h3 className="text-xl font-bold">{job.title}</h3>
+              <p>{job.company}</p>
+              <p>{job.location}</p>
+              <button className="bg-blue-500 text-white py-2 px-4 rounded">
+                View Details
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
