@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const JobDetails = ({ match }) => {
   const [job, setJob] = useState(null);
@@ -20,10 +20,10 @@ const JobDetails = ({ match }) => {
   }
 
   return (
-    <div>
-      <h2>Job Details</h2>
-      <h3>{job.title}</h3>
-      <p>{job.company}</p>
+    <div className="space-y-4">
+      <h2 className="text-2xl font-bold">Job Details</h2>
+      <h3 className="text-lg font-bold">{job.title}</h3>
+      <p className="text-gray-600">{job.company}</p>
       <p>{job.description}</p>
     </div>
   );
