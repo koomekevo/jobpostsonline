@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import NavBar from "./NavBar";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -11,13 +12,16 @@ const Register = () => {
       const response = await axios.post("/api/register", { email, password });
       console.log(response.data);
     } catch (error) {
-      console.error(error);
+      console.error("Error registering user:", error);
     }
   };
 
   return (
+    <>
+    <NavBar />
+    <br />
     <div className="flex justify-center">
-      <form onSubmit={handleRegister} className="w-1/3">
+      <form className="w-1/3" onSubmit={handleRegister}>
         <h2 className="text-2xl font-bold mb-4">Register</h2>
         <div className="mb-4">
           <label className="block mb-2">Email:</label>
@@ -45,6 +49,7 @@ const Register = () => {
         </button>
       </form>
     </div>
+    </>
   );
 };
 

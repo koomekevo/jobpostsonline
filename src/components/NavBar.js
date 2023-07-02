@@ -1,23 +1,23 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const NavBar = () => {
   return (
-    <nav className="bg-gray-800 py-4">
-      <div className="container mx-auto flex justify-between items-center">
-        <Link to="/" className="text-white text-2xl font-bold">
-          VacanciesToday
+    <nav className="bg-black p-4">
+      <div className="container mx-auto flex items-center justify-between">
+        <Link to="/" className="text-white text-xl font-bold">
+          vacancies.today
         </Link>
         <div>
           <Link
             to="/login"
-            className="text-white py-2 px-4 mx-2 rounded hover:bg-gray-700"
+            className="text-white text-sm mr-4 py-2 px-4 rounded hover:bg-white hover:text-blue-500"
           >
             Login
           </Link>
           <Link
             to="/register"
-            className="text-white py-2 px-4 mx-2 rounded hover:bg-gray-700"
+            className="text-white text-sm py-2 px-4 rounded hover:bg-white hover:text-blue-500"
           >
             Register
           </Link>

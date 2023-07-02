@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import NavBar from "./NavBar";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -11,13 +12,16 @@ const Login = () => {
       const response = await axios.post("/api/login", { email, password });
       console.log(response.data);
     } catch (error) {
-      console.error(error);
+      console.error("Error logging in:", error);
     }
   };
 
   return (
+    <>
+    <NavBar />
+    <br />
     <div className="flex justify-center">
-      <form onSubmit={handleLogin} className="w-1/3">
+      <form className="w-1/3" onSubmit={handleLogin}>
         <h2 className="text-2xl font-bold mb-4">Login</h2>
         <div className="mb-4">
           <label className="block mb-2">Email:</label>
@@ -45,6 +49,7 @@ const Login = () => {
         </button>
       </form>
     </div>
+    </>
   );
 };
 

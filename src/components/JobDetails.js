@@ -1,34 +1,36 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
+import NavBar from "./NavBar";
 
-const JobDetails = ({ jobId }) => {
-  const [job, setJob] = useState(null);
+const JobDetails = () => {
+  const { id } = useParams();
+  const [jobDetails, setJobDetails] = useState(null);
 
   useEffect(() => {
     const fetchJobDetails = async () => {
       try {
-        const response = await axios.get(`/api/joblistings/${jobId}`);
-        setJob(response.data);
+        const response = await axios.get(`/api/joblistings/${id}`);
+        setJobDetails(response.data);
       } catch (error) {
-        console.error(error);
+        console.error("Error fetching job details:", error);
       }
     };
 
     fetchJobDetails();
-  }, [jobId]);
+  }, [id]);
 
-  if (!job) {
-    return <p>Loading...</p>;
+  if (!jobDetails) {
+    return <div>Loading...</div>;
   }
 
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-4">Job Details</h2>
-      <h3 className="text-xl font-bold">{job.title}</h3>
-      <p>{job.company}</p>
-      <p>{job.location}</p>
-      <p>{job.description}</p>
-      <p>{job.requirements}</p>
+      <NavBar />
+      <br />
+      <h2 className="text-2xl font-bold mb-4">{jobDetails.title}</h2>
+      <p className="text-gray-500">{jobDetails.company}</p>
+      <p>{jobDetails.description}</p>
     </div>
   );
 };

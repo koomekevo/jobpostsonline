@@ -1,15 +1,29 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import JobListings from "./JobListings";
+import NavBar from "./NavBar";
 
 const Home = () => {
+  const [jobListings, setJobListings] = useState([]);
+
+  useEffect(() => {
+    const fetchJobListings = async () => {
+      try {
+        const response = await axios.get("/api/joblistings");
+        setJobListings(response.data);
+      } catch (error) {
+        console.error("Error fetching job listings:", error);
+      }
+    };
+
+    fetchJobListings();
+  }, []);
+
   return (
-    <div className="flex flex-col items-center">
-      <h1 className="text-3xl font-bold mb-4">Welcome to vacancies.today!</h1>
-      <p className="mb-4">Find your dream job today.</p>
-      <div className="space-x-4">
-        <Link to="/login" className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Login</Link>
-        <Link to="/register" className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Register</Link>
-      </div>
+    <div>
+      <NavBar />
+      <br />
+      <JobListings jobListings={jobListings} />
     </div>
   );
 };
